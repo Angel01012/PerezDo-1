@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo Box de Razas de Perros</title>
+    <link rel="stylesheet" href="../CSS/Dog.css"> <!-- Enlace al archivo de estilos CSS -->
+    <style>
+        .container{
+            display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Ajustar altura según tus necesidades */
+  width: 100%;
+        }
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1.5em;
+        }
+        .background-container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(lightgrey,black);
+}
+.custom-select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  background-color: lightgray;
+  color: black;
+}
+
+    </style>
+</head>
+<body>
+    <div class="background-container">
+    <div class="container">
+        <label for="breedSelect">Selecciona una raza de perros: </label>
+        <select class="custom-select" id="breedSelect"></select> <!-- Combo box para seleccionar la raza de perro -->
+        <img id="dogImage" width="400" height="350"> <!-- Imagen del perro -->
+    </div>
+    </div>
+    <script>
+        const breedSelect = document.getElementById('breedSelect');
+        const dogImage = document.getElementById('dogImage');
+
+        // Hacer una solicitud a la API para obtener la lista de razas de perros
+        fetch('https://dog.ceo/api/breeds/list/all')
+            .then(response => response.json())
+            .then(data => {
+                const breeds = data.message;
+
+                // LLena el combo box con las razas de perros
+                for (const breed in breeds) {
+                    const option = document.createElement('option');
+                    option.value = breed;
+                    option.text = breed;
+                    breedSelect.appendChild(option);
+                }
+            })
+            .catch(error => {
+                console.error('Error al cargar las razas de perros:', error);
+            });
+
+        // Detectar cambios en la selección del combo box
+        breedSelect.addEventListener('change', () => {
+            const selectedBreed = breedSelect.value;
+
+            // Hacer una solicitud a la API para obtener la imagen de la raza seleccionada
+            fetch(`https://dog.ceo/api/breed/${selectedBreed}/images/random`)
+                .then(response => response.json())
+                .then(data => {
+                    const imageUrl = data.message;
+                    dogImage.src = imageUrl;
+                    dogImage.style.display = 'block'; // Mostrar la imagen
+                })
+                .catch(error => {
+                    console.error('Error al cargar la imagen del perro:', error);
+                });
+        });
+    </script>
+</body>
+</html>
