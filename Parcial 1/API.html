@@ -39,7 +39,7 @@ margin: auto;
            <form action="/Login" method="post">
              <br /> 
                <div class="mb-3" >
-                 <h1 class="display-4">Welcome!</h1>
+                 <h1 class="display-4">Hello!</h1>
                  <label for="exampleInputEmail1" class="form-label"></label>
                  
                </div>
@@ -80,7 +80,7 @@ margin: auto;
             .then( datos => document.getElementById('ImagenEpica').src = (Variable+datos.url) )
             fetch("https://meowfacts.herokuapp.com/")
             .then( respuesta => respuesta.json())
-            .then( datos => document.getElementById('Fact').textContent = datos.data  )//
+            .then( datos => document.getElementById('Fact').textContent = datos.data)
         });
         document.getElementById("btnAxios").addEventListener("click", async function() {
             var1 = "https://cataas.com"
@@ -103,11 +103,11 @@ margin: auto;
     document.getElementById('ImagenEpica').src = (var1+response.url)
   },
   error: function(error) {
-    // Manejar errores en la petición aquí
     console.error("Ocurrió un error:", error);
   }
 });
         });
+        //XML
         document.getElementById("btnXML").addEventListener("click", function () {
             const data = null;
             const xhr = new XMLHttpRequest();
