@@ -6,5 +6,4 @@ function obtienefrase(indice) {
 }
 
 module.exports.obtienefrase = obtienefrase;
-
 console.log(module);

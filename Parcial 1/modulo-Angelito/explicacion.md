@@ -1,5 +1,5 @@
 # modulo de prueba
-#### instalacion del modulo:
+instalacion del modulo:
 ```bash
     $ npm install paketin
 ```
