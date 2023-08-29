@@ -1,10 +1,10 @@
 # modulo de prueba
 instalacion del modulo:
 ```bash
-    $ npm install paketin
+    $ npm install modulo-angelito
 ```
 uso del modulo
 ```js
-const paketin=require(`paketin`);
-let frase = paquetin.obtienefrase(n); 
+const modulo =require(`modulo-angelito`);
+let frase = modulo.obtienefrase(n); 
 ```
