@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="estado">
+        <button id="idBoton">Boton</button>
+    </div>
+    <script type="module">
+        import * as moduloes from "./moduloes.js"
+        console.log(moduloes.obtienefrase(0));
+        
+        /*document.getElementById("idBoton").addEventListener("click", function(){
+            import("./moduloes.js")
+            .then(function(moduloes) {
+                document.getElementById("estado").textContent=moduloes.obtienefrase(0)
+            })
+        })
+        */
+    </script>
+</body>
+</html>

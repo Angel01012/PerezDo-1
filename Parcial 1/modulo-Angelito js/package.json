@@ -1,0 +1,14 @@
+{
+  "name": "modulo-angelito",
+  "version": "1.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/Angel01012/PerezDo-1#readme",
+  "type": "module"
+}
