@@ -3,11 +3,12 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/alumnos/:carrera",(req,res)=>{
+app.get("/alumnos",(req,res)=>{
     console.log(req.params);
     console.log(req.query);
     console.log(req.body);
     res.send("Servidor express contestando a peticion GET");
+    //res.json({respuesta: "Contestando la peticion"})
     
 });
 app.post("/alumnos",(req,res)=>{
