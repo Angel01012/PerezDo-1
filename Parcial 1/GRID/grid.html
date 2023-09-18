@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid.js</title>
+    <link rel="stylesheet" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css">
+</head>
+<body>
+<div id="tabla"></div>
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+<script>
+new gridjs.Grid({
+    columns: ['id', 'nombre', 'apellido'],
+    server: {
+      url: 'http://localhost:8084/clientes', // Ruta del servidor Express que proporciona los datos
+      then: data => data.map(clientes => [clientes.id, clientes.nombre, clientes.apellido]), // Mapeo de datos
+    },
+  }).render(document.getElementById('tabla'));
+  console.log(gridjs)
+</script>
+</body>
+</html>
