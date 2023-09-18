@@ -7,11 +7,9 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 //var mysql      = require('mysql');
-
 //connection.connect();
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 app.use(morgan('combined', { stream: accessLogStream }))
-
 //mysql2
 const mysql = require('mysql2/promise');
 app.get("/clientes",async (req,res)=>{
