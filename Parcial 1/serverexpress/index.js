@@ -6,8 +6,14 @@ const app = express();
 app.use(express.json());
 const cors = require('cors');
 app.use(cors());
+const basicAuth = require('express-basic-auth')
+
 //var mysql      = require('mysql');
 //connection.connect();
+app.use(basicAuth({
+    users: { 'admin': '1234' }
+}))
+
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 app.use(morgan('combined', { stream: accessLogStream }))
 //mysql2
