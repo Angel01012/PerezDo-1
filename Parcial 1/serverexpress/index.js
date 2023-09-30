@@ -7,12 +7,12 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 const basicAuth = require('express-basic-auth')
-
+app.use(express.urlencoded({extended: true}));
 //var mysql      = require('mysql');
 //connection.connect();
-app.use(basicAuth({
-    users: { 'admin': '1234' }
-}))
+// app.use(basicAuth({
+//     users: { 'admin': '1234' }
+// }))
 
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 app.use(morgan('combined', { stream: accessLogStream }))
@@ -42,25 +42,13 @@ app.get("/clientes/:id", async(req, res)=>{
 })
 /* ------ */
 app.post("/clientes", async (req, res) => {
-    // console.log(req.body); // Suponemos que los datos a insertar están en el cuerpo de la solicitud POST
-    // const {id, nombre, apellido,} = req.body; // Suponiendo que se esperan estos campos
-
-    // if (!nombre ||!id || !apellido) {
-    //     res.status(400).json({ mensaje: "Se requieren los campos nombre, edad y correo en el cuerpo de la solicitud" });
-    //     return;
-    // }
     console.log("entra a la sentencia");
-    const sentencia = `INSERT INTO personas (id,nombre, apellido) VALUES (${req.query.id}, '${req.query.nombre}', '${req.query.apellido}');`;
+    const sentencia = `INSERT INTO personas (id,nombre, apellido) VALUES (${req.body.id}, '${req.body.nombre}', '${req.body.apellido}');`;
     try {
         const conn = await mysql.createConnection({host:'localhost', user: 'root', password: '162460132-2', database: 'clientes'});
         console.log(sentencia)
         const [rows,fields] = await conn.query(sentencia);
-        res.json({message: "se modifico"});
-        // if (result.affectedRows > 0) {
-        //     res.json({ mensaje: "Registro insertado correctamente" });
-        // } else {
-        //     res.status(500).json({ mensaje: "No se pudo insertar el registro" });
-        // }
+        res.json({message: "se Agrego"});
     } catch (err) {
         res.status(500).json({ mensaje: err.sqlMessage });
     }
@@ -133,7 +121,7 @@ app.get("/alumnos",(req,res)=>{
     //res.json({respuesta: "Contestando la peticion"})
     
 });
-app.post("/alumnos",(req,res)=>{
+app.post("/clientes",(req,res)=>{
     res.send("Servidor express contestando a peticion POST");
 });
 app.listen(8084,(req,res)=>{
