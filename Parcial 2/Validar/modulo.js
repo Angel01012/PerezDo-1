@@ -1,0 +1,3 @@
+function loging (req,res){
+
+}

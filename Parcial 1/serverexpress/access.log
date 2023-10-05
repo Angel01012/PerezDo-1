@@ -34,3 +34,6 @@
 ::1 - - [29/Sep/2023:13:52:10 +0000] "GET /clientes HTTP/1.1" 200 513 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
 ::1 - - [02/Oct/2023:13:18:13 +0000] "POST /clientes HTTP/1.1" 200 23 "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
 ::1 - - [02/Oct/2023:13:18:13 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8084/clientes" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [05/Oct/2023:13:46:17 +0000] "GET /clientes HTTP/1.1" 200 562 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [05/Oct/2023:13:47:56 +0000] "GET /clientes HTTP/1.1" 200 562 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [05/Oct/2023:13:53:09 +0000] "GET /clientes HTTP/1.1" 200 562 "-" "Thunder Client (https://www.thunderclient.com)"

@@ -40,6 +40,7 @@ app.get("/clientes/:id", async(req, res)=>{
         res.json(rows)
     }
 })
+
 /* ------ */
 app.post("/clientes", async (req, res) => {
     console.log("entra a la sentencia");
@@ -123,6 +124,20 @@ app.get("/alumnos",(req,res)=>{
 });
 app.post("/clientes",(req,res)=>{
     res.send("Servidor express contestando a peticion POST");
+});
+
+app.get("/clientes", (req, res, next) => {
+    try {
+        res.status(500).send("error: servidor no responde");
+    } catch (error) {
+        next(error); 
+    }
+});
+
+app.use((err, req, res, next) => {
+    res.status(500).send({
+    message: err.message
+    });
 });
 app.listen(8084,(req,res)=>{
 
