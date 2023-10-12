@@ -33,14 +33,14 @@ app.post("/clientes",checkSchema({
 )
 app.get("/clientes", (req, res, next) => {
     try {
-    throw new Error("Error generado para prueba");
+    throw new Error("Error de prueba 500");
     } catch (error) {
         next(error); 
     }
 });
 
 app.use((err, req, res, next) => {
-    res.status(502).send("Hubo un error en el servidor: " + err.message);
+    res.status(502).send("Hubo un error en el servidor error 502: " + err.message);
 });
 
 app.listen(8084,()=>{
