@@ -1,0 +1,71 @@
+{
+  "name": "modulo-angelito",
+  "version": "1.0.2",
+  "description": "instalacion del modulo:\r ```bash\r     $ npm install modulo-angelito\r ```\r uso del modulo\r ```js\r const modulo =require(`modulo-angelito`);\r let frase = modulo.obtienefrase(n); \r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc -c jsdoc.json --readme README.MD"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Angel01012/PerezDo-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Angel01012/PerezDo-1/issues"
+  },
+  "homepage": "https://github.com/Angel01012/PerezDo-1#readme",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {
+    "acorn": "^8.10.0",
+    "argparse": "^2.0.1",
+    "bluebird": "^3.7.2",
+    "buffer-from": "^1.1.2",
+    "camel-case": "^4.1.2",
+    "catharsis": "^0.9.0",
+    "clean-css": "^5.3.2",
+    "clean-jsdoc-theme": "^4.2.13",
+    "commander": "^10.0.1",
+    "dot-case": "^3.0.4",
+    "entities": "^4.5.0",
+    "escape-string-regexp": "^2.0.0",
+    "fs-extra": "^10.1.0",
+    "graceful-fs": "^4.2.11",
+    "html-minifier-terser": "^7.2.0",
+    "js2xmlparser": "^4.0.2",
+    "jsdoc": "^4.0.2",
+    "jsonfile": "^6.1.0",
+    "klaw": "^3.0.0",
+    "klaw-sync": "^6.0.0",
+    "linkify-it": "^3.0.3",
+    "lodash": "^4.17.21",
+    "lower-case": "^2.0.2",
+    "markdown-it": "^12.3.2",
+    "markdown-it-anchor": "^8.6.7",
+    "marked": "^4.3.0",
+    "mdurl": "^1.0.1",
+    "mkdirp": "^1.0.4",
+    "nanoid": "^3.3.6",
+    "no-case": "^3.0.4",
+    "param-case": "^3.0.4",
+    "pascal-case": "^3.1.2",
+    "relateurl": "^0.2.7",
+    "requizzle": "^0.2.4",
+    "showdown": "^2.1.0",
+    "source-map": "^0.6.1",
+    "source-map-support": "^0.5.21",
+    "strip-json-comments": "^3.1.1",
+    "terser": "^5.21.0",
+    "tslib": "^2.6.2",
+    "uc.micro": "^1.0.6",
+    "underscore": "^1.13.6",
+    "universalify": "^2.0.0",
+    "xmlcreate": "^2.0.4"
+  },
+  "devDependencies": {}
+}
