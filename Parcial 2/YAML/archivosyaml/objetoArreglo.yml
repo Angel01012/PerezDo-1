@@ -1,0 +1,7 @@
+personas:
+  - nombre: Angel
+    apellido: Perez
+    edad: 22
+  - nombre: Roberto
+    apellido: Fernández
+    edad: 42
