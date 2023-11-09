@@ -50,6 +50,20 @@ app.get("/clientes",async (req,res)=>{
        //res.json({mensaje:"Error de conexion"});
     }
 });
+
+/**
+ * @swagger
+ * /clientes{id}:
+ *   get:
+ *     tags:
+ *       - clientes
+ *     summary: Consulta usuarios especificos 
+ *     description: Obtiene un Json que contiene los clientesde la Base de Datos
+ *     responses:
+ *       200:
+ *         description: Regresa un Json con todos los usuarios
+ */
+
 app.get("/clientes/:id", async(req, res)=>{
     const conn = await mysql.createConnection({host:'localhost', user: 'root', password: '162460132-2', database: 'clientes'});
     const [rows,fields] = await conn.query('SELECT * FROM personas where id='+req.params.id);
