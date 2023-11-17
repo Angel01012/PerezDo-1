@@ -1,3 +1,5 @@
+const { SwaggerTheme } = require('swagger-themes');
+const OpenAPISnippet = require('openapi-snippet');
 const express = require('express');
 const morgan = require('morgan')
 var fs = require('fs')
@@ -8,37 +10,88 @@ const app = express();
 app.use(express.json());
 const cors = require('cors');
 app.use(cors());
+const redoc = require('redoc-express');
 const basicAuth = require('express-basic-auth')
 app.use(express.urlencoded({extended: true}));
-//var mysql      = require('mysql');
-//connection.connect();
-// app.use(basicAuth({
-//     users: { 'admin': '1234' }
-// }))
+
+
+const theme = new SwaggerTheme('v3');
+
+const options = {
+    explorer: true,
+    customCss: theme.getBuffer('muted')
+};
+
+
+const def = fs.readFileSync(path.join(__dirname,'/swagger.json'), { encoding: 'utf8', flag: 'r' });
+const MD = fs.readFileSync(path.join(__dirname,'/README.MD'), { encoding: 'utf8', flag: 'r' });
+const defObj = JSON.parse(def);
+defObj.info.description=MD;
+
+const swaggerOptions = {
+    definition:defObj,
+    apis: [`${path.join(__dirname,"./index.js")}`],
+}
+
+app.get(
+    '/api-docs-redoc',
+    redoc({
+    title: 'API Docs',
+    specUrl: '/api-docs-json',
+    nonce: '', // <= it is optional,we can omit this key and value
+    // we are now start supporting the redocOptions object
+    // you can omit the options object if you don't need it
+    // https://redocly.com/docs/api-reference-docs/configuration/functionality/
+    redocOptions: {
+        theme: {
+        colors: {
+            primary: {
+            main: '#6EC5AB'
+            }
+        },
+        typography: {
+            fontFamily: `"museo-sans", 'Helvetica Neue', Helvetica, Arial, sans-serif`,
+            fontSize: '15px',
+            lineHeight: '1.5',
+            code: {
+            code: '#87E8C7',
+            backgroundColor: '#4D4D4E'
+            }
+        },
+        menu: {
+            backgroundColor: '#ffffff'
+        }
+        }
+    }
+    })
+);
+
+
+
 
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 app.use(morgan('combined', { stream: accessLogStream }))
 
-const swaggerOptions = {
-    definition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'API Empleados',
-            version: '1.0.0',
-            },
-        servers:[
-        {url: "http://localhost:8084"}
-        ],
-        },
-    apis: [`${path.join(__dirname,"./index.js")}`],
-    };
-
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocs));
-
+app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocs, options));
+app.use("/api-docs-json",(req,res)=>{
+    res.json(swaggerDocs);
+})
 //mysql2
 const mysql = require('mysql2/promise');
 
+/**
+ * @swagger
+ * /clientes:
+ *   get:
+ *     tags:
+ *       - clientes
+ *     summary: Consulta Clientes especificos
+ *     description: Obtiene un Json que contiene los clientesde la Base de Datos
+ *     responses:
+ *       200:
+ *         description: Regresa un Json con todos los clientes
+ */
 app.get("/clientes",async (req,res)=>{
     try{
     const conn = await mysql.createConnection({host:'localhost', user: 'root', password: '162460132-2', database: 'clientes'});
@@ -50,19 +103,6 @@ app.get("/clientes",async (req,res)=>{
        //res.json({mensaje:"Error de conexion"});
     }
 });
-
-/**
- * @swagger
- * /clientes{id}:
- *   get:
- *     tags:
- *       - clientes
- *     summary: Consulta usuarios especificos 
- *     description: Obtiene un Json que contiene los clientesde la Base de Datos
- *     responses:
- *       200:
- *         description: Regresa un Json con todos los usuarios
- */
 
 app.get("/clientes/:id", async(req, res)=>{
     const conn = await mysql.createConnection({host:'localhost', user: 'root', password: '162460132-2', database: 'clientes'});
@@ -175,6 +215,5 @@ app.use((err, req, res, next) => {
     });
 });
 app.listen(8084,(req,res)=>{
-
     console.log("Servidor express escuchando");
 });
