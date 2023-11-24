@@ -214,3 +214,4 @@
 ::1 - - [17/Nov/2023:14:12:33 +0000] "GET /api-docs-json HTTP/1.1" 200 634 "-" "undici"
 ::1 - - [17/Nov/2023:14:22:47 +0000] "GET /api-docs-json HTTP/1.1" 200 634 "-" "undici"
 ::1 - - [17/Nov/2023:14:23:13 +0000] "GET /api-docs-json HTTP/1.1" 200 634 "-" "undici"
+::1 - - [17/Nov/2023:14:24:50 +0000] "GET /api-docs-json HTTP/1.1" 200 634 "-" "undici"
