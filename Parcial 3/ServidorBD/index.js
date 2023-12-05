@@ -5,7 +5,7 @@ var path = require('path')
 const app = express();
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsdoc = require('swagger-jsdoc')
-//var mysql      = require('mysql');
+var mysql = require('mysql');
 
 //connection.connect();
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })

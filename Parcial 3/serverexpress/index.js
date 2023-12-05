@@ -14,6 +14,12 @@ const redoc = require('redoc-express');
 const basicAuth = require('express-basic-auth')
 app.use(express.urlencoded({extended: true}));
 
+const port = process.env.PORT || 8084
+const host = process.env.host || 'localhost'
+const user = process.env.user || 'root'
+const password = process.env.password || '162460132-2'
+const database = process.env.database || 'clientes'
+const dbport = process.env.dbport || 3306
 
 const theme = new SwaggerTheme('v3');
 
@@ -104,6 +110,28 @@ app.get("/clientes",async (req,res)=>{
     }
 });
 
+// SELECT
+/**
+ * @swagger
+ * /clientes/{id}:
+ *   get:
+ *     tags:
+ *       - Clientes
+ *     summary: Consultar un cliente por ID
+ *     description: Obtiene Json con un cliente específico de la Base de Datos
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID del acliente a consultar
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Regresa un Json con el cliente solicitado
+ *       404:
+ *         description: El cliente no existe
+ */
 app.get("/clientes/:id", async(req, res)=>{
     const conn = await mysql.createConnection({host:'localhost', user: 'root', password: '162460132-2', database: 'clientes'});
     const [rows,fields] = await conn.query('SELECT * FROM personas where id='+req.params.id);
@@ -117,6 +145,36 @@ app.get("/clientes/:id", async(req, res)=>{
 })
 
 /* ------ */
+// INSERT INTO
+/**
+ * @swagger
+ * /clientes/:
+ *   post:
+ *     tags:
+ *       - Clientes
+ *     summary: Agregar un nuevo Cliente
+ *     description: Agrega un nuevo Cliente a la Base de Datos con los parámetros proporcionados en el cuerpo de la solicitud
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idtec:
+ *                 type: integer
+ *               nombre:
+ *                 type: string
+ *               apellido:
+ *                 type: string
+ *             required:
+ *               - id
+ *               - nombre
+ *               - apellido
+ *     responses:
+ *       201:
+ *         description: Cliente agregado correctamente
+ */
 app.post("/clientes", async (req, res) => {
     console.log("entra a la sentencia");
     const sentencia = `INSERT INTO personas (id,nombre, apellido) VALUES (${req.body.id}, '${req.body.nombre}', '${req.body.apellido}');`;
@@ -131,6 +189,38 @@ app.post("/clientes", async (req, res) => {
 });
 
 /* ------ */
+// UPDATE
+/**
+ * @swagger
+ * /clientes/:
+ *   put:
+ *     tags:
+ *       - Clientes
+ *     summary: Modificar un cliente existente
+ *     description: Modifica un cliente existente en la Base de Datos con los parámetros proporcionados en el cuerpo de la solicitud
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: integer
+ *               nombre:
+ *                 type: string
+ *               apellido:
+ *                 type: string
+ *             required:
+ *               - idtec
+ *     responses:
+ *       200:
+ *         description: Cliente modificado correctamente
+ *       404:
+ *         description: Cliente no encontrado
+ *       400:
+ *         description: Solicitud incorrecta
+ */
 app.put("/clientes", async (req, res) => {
     console.log(req.query);
     //----
@@ -176,6 +266,28 @@ console.log(sentencia)
     }
 });
 
+// DELETE
+/**
+ * @swagger
+ * /clientes/:
+ *   delete:
+ *     tags:
+ *       - Clientes
+ *     summary: Eliminar un cliente por ID
+ *     description: Elimina un cliente de la Base de Datos según el ID proporcionado en los parámetros de la solicitud
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         description: ID del cliente a eliminar
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Registro eliminado correctamente
+ *       404:
+ *         description: Registro no encontrado
+ */
 app.delete("/clientes",async (req,res)=>{
     console.log(req.query)
     const sentencia = `delete FROM personas where id=${req.query.id}`;
